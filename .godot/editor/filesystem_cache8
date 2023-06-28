@@ -1,0 +1,9 @@
+2a60927148abd1d33b818b535e306557
+::res://::1687984904
+icon.svg::CompressedTexture2D::5538869543397084134::1687876833::1687877028::1::::<><>::
+player.gd::GDScript::-1::1687898381::0::1::::<>CharacterBody2D<>::
+player.png::CompressedTexture2D::6726333107301287521::1687897676::1687897676::1::::<><>::
+player.tscn::PackedScene::6064693953519644856::1687983902::0::1::::<><>::res://player.gd<>uid://c23jyuok26c06
+README.md::TextFile::-1::1687984800::0::1::::<><>::
+world.gd::GDScript::-1::1687983899::0::1::::<>Node2D<>::
+world.tscn::PackedScene::3818058851337949724::1687983902::0::1::::<><>::res://world.gd<>uid://csn1vguhf6mvw
