@@ -78,7 +78,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qijer"]
-size = Vector2(8, 16)
+size = Vector2(10, 16)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ix58f")
@@ -92,3 +92,7 @@ frame_progress = 0.461053
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_qijer")
+
+[node name="CoyoteJumpTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true

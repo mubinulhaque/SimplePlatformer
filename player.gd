@@ -6,6 +6,7 @@ const FRICTION = 1000.0
 const JUMP_VELOCITY = -300.0
 
 @onready var sprite = $AnimatedSprite2D
+@onready var coyote_jump_timer = $CoyoteJumpTimer
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -16,7 +17,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 	# Handle Jump.
-	if is_on_floor() and Input.is_action_just_pressed("ui_accept"):
+	if (is_on_floor() or coyote_jump_timer.time_left > 0.0) and Input.is_action_just_pressed("ui_accept"):
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
@@ -29,7 +30,15 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 		sprite.play("idle")
-
+	
+	#Change the sprite animation to be jumping if in the air
+	#This has to be after the movement code, otherwise the "run" animation can ovveride the animation
 	if not is_on_floor():
 		sprite.play("jump")
+		
+	#Moving while accounting for Coyote Time
+	var was_on_floor = is_on_floor()
 	move_and_slide()
+	var just_left_ground = was_on_floor and not is_on_floor() and velocity.y >= 0 #Has the player just left the ground and now falling
+	if just_left_ground:
+		coyote_jump_timer.start()
