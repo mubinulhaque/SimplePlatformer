@@ -19,15 +19,15 @@ func _physics_process(delta):
 		var wall_normal = get_wall_normal()
 		if (
 				not is_on_floor()
-				and ((Input.is_action_just_pressed("ui_left") and wall_normal == Vector2.LEFT)
-				or (Input.is_action_just_pressed("ui_right") and wall_normal == Vector2.RIGHT))
+				and ((Input.is_action_just_pressed("game_left") and wall_normal == Vector2.LEFT)
+				or (Input.is_action_just_pressed("game_right") and wall_normal == Vector2.RIGHT))
 		):
 			velocity.x = wall_normal.x * movement_data.speed
 			velocity.y = movement_data.jump_velocity
 
 	# Handle normal jumping
 	if is_on_floor(): double_jump = true
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("game_jump"):
 		if (is_on_floor() or coyote_jump_timer.time_left > 0.0):
 			# If the player is on the floor or has just left the floor
 			velocity.y = movement_data.jump_velocity
@@ -36,8 +36,7 @@ func _physics_process(delta):
 			double_jump = false
 
 	# Get the input direction and handle the movement/deceleration
-	# As good practice, you should replace UI actions with custom gameplay actions
-	var horizontal_direction = Input.get_axis("ui_left", "ui_right")
+	var horizontal_direction = Input.get_axis("game_left", "game_right")
 	if horizontal_direction: # If the player wants to move horizontally
 		if is_on_floor(): # If the player wants to move horizontally while on the ground
 			velocity.x = move_toward(velocity.x, horizontal_direction * movement_data.speed,
