@@ -1,8 +1,7 @@
 extends CharacterBody2D
 
 # If the player has collided with a hazard
-func _on_hazard_detector_area_entered(area):
-	print("Collided with hazard!")
+func _on_hazard_detector_area_entered(_area):
 	global_position = starting_position
 
 @export var movement_data : PlayerMovementData
@@ -68,7 +67,7 @@ func _physics_process(delta):
 	
 	# Change the sprite animation to be jumping if in the air
 	# This has to be after the movement code,
-	# otherwise the "run" animation can ovveride the animation
+	# otherwise the "run" animation can override the animation
 	if not is_on_floor():
 		sprite.play("jump")
 		
