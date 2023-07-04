@@ -6,8 +6,8 @@ func _on_hazard_detector_area_entered(_area):
 
 @export var movement_data : PlayerMovementData
 
-var can_double_jump : bool = false
-var wall_jumping : bool = false
+var can_double_jump: bool = false
+var wall_jumping: bool = false
 # Get the gravity from the project settings to be synced with RigidBody nodes
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") 
 
