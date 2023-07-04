@@ -10,5 +10,4 @@ func _show_level_completed():
 
 func _ready():
 	RenderingServer.set_default_clear_color(Color.BLACK)
-	polygon.polygon = collision_polygon.polygon # Draws the collision polygon's shape
 	Events.level_completed.connect(_show_level_completed)
