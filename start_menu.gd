@@ -12,5 +12,6 @@ func _on_quit_button_pressed():
 @onready var start_button = %StartButton
 
 func _ready():
+	RenderingServer.set_default_clear_color(Color.BLACK)
 	start_button.grab_focus()
 	pass
