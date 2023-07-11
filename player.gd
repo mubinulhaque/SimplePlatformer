@@ -1,18 +1,16 @@
 extends CharacterBody2D
 
-# If the player has collided with a hazard
-func _on_hazard_detector_area_entered(_area):
-	global_position = starting_position
-
 @export var movement_data : PlayerMovementData
 
 var can_double_jump: bool = false
 var wall_jumping: bool = false
 # Get the gravity from the project settings to be synced with RigidBody nodes
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") 
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var old_wall_normal = Vector2.ZERO
 
 @onready var sprite = $AnimatedSprite2D
 @onready var coyote_jump_timer = $CoyoteJumpTimer
+@onready var wall_jump_timer = $WallJumpTimer
 @onready var starting_position = global_position
 
 func _physics_process(delta):
@@ -21,10 +19,17 @@ func _physics_process(delta):
 		velocity.y += gravity * movement_data.gravity_scale * delta
 		
 	# Handle wall jumping
-	if is_on_wall_only() and Input.is_action_just_pressed("game_jump"):
+	if ((is_on_wall_only() or wall_jump_timer.time_left > 0.0)
+			and Input.is_action_just_pressed("game_jump")):
 		# If the player is only colliding with a wall (and not the floor)
-		# and wants to jump
+		# or has just left the wall and wants to jump
 		var wall_normal = get_wall_normal()
+		
+		if wall_jump_timer.time_left > 0.0: # If the player has just left the wall
+			# Get the old wall normal since get_wall_normal() only returns
+			# a value if the player is colliding with a wall
+			wall_normal = old_wall_normal
+		
 		velocity.x = wall_normal.x * movement_data.speed
 		velocity.y = movement_data.jump_velocity
 		sprite.flip_h = (velocity.x < 0)
@@ -71,11 +76,31 @@ func _physics_process(delta):
 	if not is_on_floor():
 		sprite.play("jump")
 		
-	# Move while accounting for Coyote Time
+	# Check for the player colliding with the level
 	var was_on_floor = is_on_floor()
+	var was_on_wall = is_on_wall_only()
+	
+	# Update old wall normal
+	if was_on_wall:
+		old_wall_normal = get_wall_normal()
+	
 	move_and_slide()
+	
+	# Start the Coyote Timer
 	var just_left_ground = was_on_floor and not is_on_floor() and velocity.y >= 0
 	if just_left_ground: # If the player just left the ground and now falling
 		coyote_jump_timer.start()
-		
+	
+	# Start the Wall Jump Timer
+	var just_left_wall = was_on_wall and not is_on_wall_only()
+	if just_left_wall:
+		wall_jump_timer.start()
+	
+	# Set wall jumping to false so that players can wall jump again
 	wall_jumping = false
+
+
+# If the player has collided with a hazard
+func _on_hazard_detector_area_entered(_area):
+	# Reset the player's position
+	global_position = starting_position
