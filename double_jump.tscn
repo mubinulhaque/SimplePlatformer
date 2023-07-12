@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://ct1armfwldbk6"]
+
+[ext_resource type="Script" path="res://double_jump.gd" id="1_0owgj"]
+[ext_resource type="Texture2D" uid="uid://cq2apg5f7skt2" path="res://double_jump.png" id="1_8khbl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xpoiu"]
+
+[node name="DoubleJump" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_0owgj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8khbl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xpoiu")

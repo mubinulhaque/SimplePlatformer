@@ -1,5 +1,14 @@
 extends Node2D
 
+@export var next_level: PackedScene
+
+@onready var level_completed = $CanvasLayer/LevelCompleted
+
+
+func _ready():
+	Events.level_completed.connect(_show_level_completed)
+
+
 func _show_level_completed():
 	level_completed.show()
 	get_tree().paused = true
@@ -12,10 +21,3 @@ func _show_level_completed():
 	get_tree().paused = false
 	get_tree().change_scene_to_packed(next_level)
 	LevelTransition.fade_from_black()
-
-@export var next_level: PackedScene
-
-@onready var level_completed = $CanvasLayer/LevelCompleted
-
-func _ready():
-	Events.level_completed.connect(_show_level_completed)
