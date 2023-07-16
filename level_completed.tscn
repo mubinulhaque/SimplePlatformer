@@ -8,6 +8,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.219608)
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+offset_left = 60.0
+offset_top = 63.0
+offset_right = 260.0
+offset_bottom = 113.0
+color = Color(0, 0, 0, 0.392157)
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15

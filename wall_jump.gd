@@ -2,4 +2,4 @@ extends Ability
 
 
 func _gain_ability(player: Player):
-	player.unlocked_double_jump = true
+	player.unlocked_wall_jump = true

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3g7hptvtbsse"]
+
+[ext_resource type="Script" path="res://wall_jump.gd" id="1_3h2nt"]
+[ext_resource type="Texture2D" uid="uid://duyreqvg4ai4j" path="res://wall_jump.png" id="1_ibrmc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nwwws"]
+size = Vector2(16, 15)
+
+[node name="WallJump" type="Area2D"]
+script = ExtResource("1_3h2nt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ibrmc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_nwwws")

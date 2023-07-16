@@ -10,6 +10,8 @@ extends CharacterBody2D
 
 ## Whether the player has unlocked the double jump ability
 var unlocked_double_jump: bool = false
+## Whether the player has unlocked the wall jump ability
+var unlocked_wall_jump: bool = false
 ## Whether the player has used their double jump ability yet.[br]
 ## Note: This will always be false if unlocked_double_jump is false.
 var can_double_jump: bool = false
@@ -21,19 +23,19 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 ## The normal of the last wall that the player has collided with.
 ## Used to ensure the player can still wall jump for a small timeframe
 ## after the player has left the wall.
-var last_wall_normal = Vector2.ZERO
+var last_wall_normal: Vector2 = Vector2.ZERO
 
 ## The animated sprite used to represent the player
-@onready var sprite = $AnimatedSprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 ## The timer used to allow jumping for a small timeframe after the player
 ## has left the ground
-@onready var coyote_jump_timer = $CoyoteJumpTimer
+@onready var coyote_jump_timer: Timer = $CoyoteJumpTimer
 ## The timer used to allow wall-jumping for a small timeframe after the player
 ## has left a wall
-@onready var wall_jump_timer = $WallJumpTimer
+@onready var wall_jump_timer: Timer = $WallJumpTimer
 ## The position the player was at when they started the level.
 ## Used to reset the player's position if they die.
-@onready var starting_position = global_position
+@onready var starting_position: Vector2 = global_position
 
 
 func _physics_process(delta):
@@ -43,10 +45,11 @@ func _physics_process(delta):
 		
 	# Handle wall jumping
 	if ((is_on_wall_only() or wall_jump_timer.time_left > 0.0)
-			and Input.is_action_just_pressed("game_jump")):
+			and Input.is_action_just_pressed("game_jump")
+			and unlocked_wall_jump):
 		# If the player is only colliding with a wall (and not the floor)
 		# or has just left the wall and wants to jump
-		var wall_normal = get_wall_normal()
+		var wall_normal: Vector2 = get_wall_normal()
 		
 		if wall_jump_timer.time_left > 0.0: # If the player has just left the wall
 			# Get the old wall normal since get_wall_normal() only returns
@@ -125,8 +128,3 @@ func _physics_process(delta):
 func _on_hazard_detector_area_entered(_area):
 	# Reset the player's position
 	global_position = starting_position
-
-
-## Unlocks the player's ability to double-jump
-func unlock_double_jump():
-	unlocked_double_jump = true
