@@ -78,6 +78,37 @@ script = ExtResource("1_irqg8")
 [node name="LevelCompleted" parent="CanvasLayer" instance=ExtResource("5_hf3jy")]
 visible = false
 
+[node name="LevelTimer" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 0.27451)
+
+[node name="SecondsLabel" type="Label" parent="CanvasLayer/LevelTimer"]
+layout_mode = 2
+offset_left = 212.0
+offset_top = 4.0
+offset_right = 254.0
+offset_bottom = 25.0
+text = "secs"
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/LevelTimer"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 4.0
+offset_bottom = 25.0
+grow_horizontal = 2
+
+[node name="LevelTimerLabel" type="Label" parent="CanvasLayer/LevelTimer/CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+text = "0.000"
+vertical_alignment = 1
+
 [node name="CountdownScreen" type="ColorRect" parent="CanvasLayer"]
 visible = false
 anchors_preset = 15
@@ -85,7 +116,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.27451)
+color = Color(0, 0, 0, 0.498039)
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/CountdownScreen"]
 layout_mode = 1
@@ -107,3 +138,6 @@ autoplay = "countdown"
 libraries = {
 "": SubResource("AnimationLibrary_dh4gl")
 }
+
+[connection signal="next_level" from="CanvasLayer/LevelCompleted" to="." method="go_to_next_level"]
+[connection signal="retry" from="CanvasLayer/LevelCompleted" to="." method="_on_retry_button_pressed"]

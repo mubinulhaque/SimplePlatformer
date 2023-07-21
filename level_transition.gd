@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var animation_player = $AnimationPlayer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func fade_from_black():
 	animation_player.play_backwards("fade_to_black")

@@ -1,5 +1,12 @@
 extends CenterContainer
 
+
+func _ready():
+	RenderingServer.set_default_clear_color(Color.BLACK)
+	%StartButton.grab_focus()
+	pass
+
+
 func _on_start_button_pressed():
 	await LevelTransition.fade_to_black()
 	get_tree().change_scene_to_file("res://level_1.tscn")
@@ -8,10 +15,3 @@ func _on_start_button_pressed():
 
 func _on_quit_button_pressed():
 	get_tree().quit()
-
-@onready var start_button = %StartButton
-
-func _ready():
-	RenderingServer.set_default_clear_color(Color.BLACK)
-	start_button.grab_focus()
-	pass
