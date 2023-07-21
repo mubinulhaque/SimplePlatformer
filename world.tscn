@@ -1,9 +1,70 @@
-[gd_scene load_steps=5 format=3 uid="uid://bunq4vnyh8fvg"]
+[gd_scene load_steps=8 format=3 uid="uid://bunq4vnyh8fvg"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_irqg8"]
 [ext_resource type="PackedScene" uid="uid://csn1vguhf6mvw" path="res://player.tscn" id="2_1sbfj"]
 [ext_resource type="PackedScene" uid="uid://be343nm3f2dao" path="res://level_completed.tscn" id="5_hf3jy"]
 [ext_resource type="PackedScene" uid="uid://b06yrdmg8lyiv" path="res://level_tile_map.tscn" id="6_1lp61"]
+
+[sub_resource type="Animation" id="Animation_oe2lm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/CountdownScreen/CenterContainer/CountdownLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Start in: 3"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/CountdownScreen:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_0ppjr"]
+resource_name = "countdown"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/CountdownScreen/CenterContainer/CountdownLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": ["Start in: 3", "Start in: 2", "Start in: 1"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/CountdownScreen:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dh4gl"]
+_data = {
+"RESET": SubResource("Animation_oe2lm"),
+"countdown": SubResource("Animation_0ppjr")
+}
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_irqg8")
@@ -16,3 +77,33 @@ script = ExtResource("1_irqg8")
 
 [node name="LevelCompleted" parent="CanvasLayer" instance=ExtResource("5_hf3jy")]
 visible = false
+
+[node name="CountdownScreen" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.27451)
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/CountdownScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="CountdownLabel" type="Label" parent="CanvasLayer/CountdownScreen/CenterContainer"]
+layout_mode = 2
+text = "Start in: 3"
+
+[node name="CountdownPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
+autoplay = "countdown"
+libraries = {
+"": SubResource("AnimationLibrary_dh4gl")
+}

@@ -294,6 +294,7 @@ texture = ExtResource("1_0wdns")
 8:2/0/physics_layer_0/angular_velocity = 0.0
 8:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 8:2/0/terrains_peering_bit/right_side = 0
+8:2/0/terrains_peering_bit/bottom_right_corner = 0
 8:2/0/terrains_peering_bit/bottom_side = 0
 8:2/0/terrains_peering_bit/bottom_left_corner = 0
 8:2/0/terrains_peering_bit/left_side = 0

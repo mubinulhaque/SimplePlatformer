@@ -3,10 +3,20 @@ extends Node2D
 @export var next_level: PackedScene
 
 @onready var level_completed = $CanvasLayer/LevelCompleted
+@onready var countdown_player = $CountdownPlayer
 
 
 func _ready():
 	Events.level_completed.connect(_show_level_completed)
+	
+	# Fade from black, pause the game and start the countdown
+	get_tree().paused = true
+	await LevelTransition.fade_from_black()
+	countdown_player.play("countdown")
+	
+	# Wait for the countdown to finish before unpausing
+	await countdown_player.animation_finished
+	get_tree().paused = false
 
 
 func _show_level_completed():
@@ -20,4 +30,3 @@ func _show_level_completed():
 	await LevelTransition.fade_to_black()
 	get_tree().paused = false
 	get_tree().change_scene_to_packed(next_level)
-	LevelTransition.fade_from_black()

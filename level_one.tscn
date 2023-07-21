@@ -13,6 +13,12 @@ next_level = ExtResource("2_gawq3")
 [node name="Player" parent="." index="0"]
 position = Vector2(32, 120)
 
+[node name="CountdownTimer" parent="CanvasLayer" index="1"]
+visible = false
+
+[node name="CountdownLabel" parent="CanvasLayer/CountdownTimer/CenterContainer/CountdownLabel" index="0"]
+layout_mode = 0
+
 [node name="Spikes" parent="." index="3" instance=ExtResource("2_hh60k")]
 position = Vector2(168, 112)
 

@@ -11,8 +11,10 @@ config_version=5
 [application]
 
 config/name="Simple Platformer"
+config/tags=PackedStringArray("2d", "singleplayer")
 run/main_scene="res://start_menu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
+run/max_fps=60
 config/icon="res://icon.svg"
 
 [autoload]
@@ -32,6 +34,7 @@ window/stretch/mode="canvas_items"
 
 theme/custom="res://default_theme.tres"
 theme/custom_font="res://pixel_font.ttf"
+theme/default_font_subpixel_positioning=0
 
 [input]
 
@@ -107,3 +110,4 @@ game_jump={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="mobile"

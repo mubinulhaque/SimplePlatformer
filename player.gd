@@ -67,9 +67,10 @@ func _physics_process(delta):
 	
 	# Handle jumping 
 	if Input.is_action_just_pressed("game_jump"):
-		if (is_on_floor() or coyote_jump_timer.time_left > 0.0):
+		if is_on_floor() or coyote_jump_timer.time_left > 0.0:
 			# If the player is on the floor or has just left the floor
 			velocity.y = movement_data.jump_velocity
+			coyote_jump_timer.stop()
 		elif can_double_jump and not wall_jumping:
 			# If the player is mid-air and can double jump
 			velocity.y = movement_data.jump_velocity
