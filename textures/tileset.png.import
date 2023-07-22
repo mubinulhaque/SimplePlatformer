@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq2apg5f7skt2"
-path="res://.godot/imported/double_jump.png-c3b4ab82b449bed3e528c0ce252d5226.ctex"
+uid="uid://c4q82v3kyllfj"
+path="res://.godot/imported/tileset.png-c58e1bf82d47fc19d60aef6c7192e952.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://double_jump.png"
-dest_files=["res://.godot/imported/double_jump.png-c3b4ab82b449bed3e528c0ce252d5226.ctex"]
+source_file="res://textures/tileset.png"
+dest_files=["res://.godot/imported/tileset.png-c58e1bf82d47fc19d60aef6c7192e952.ctex"]
 
 [params]
 

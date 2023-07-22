@@ -18,5 +18,5 @@ func _on_body_entered(body: PhysicsBody2D):
 
 
 ## Defines what happens when a player collides with the ability.
-func _gain_ability(player: Player):
+func _gain_ability(player: Player) -> void:
 	print("Ability has been gained!")

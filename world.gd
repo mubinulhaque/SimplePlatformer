@@ -30,9 +30,10 @@ func _ready():
 func _process(_delta):
 	level_time_passed = Time.get_ticks_msec() - level_time_at_start
 	level_timer_label.text = str(level_time_passed / 1000)
+	print(level_time_passed)
 
 
-func go_to_next_level():
+func go_to_next_level() -> void:
 	if not next_level is PackedScene: # If no next level has been chosen
 		return # Do not run the rest of this procedure
 	# Otherwise
@@ -42,13 +43,13 @@ func go_to_next_level():
 	get_tree().change_scene_to_packed(next_level)
 
 
-func _show_level_completed():
+func _show_level_completed() -> void:
 	level_completed.show()
 	level_completed.next_level_button.grab_focus()
 	get_tree().paused = true
 
 
-func _on_retry_button_pressed():
+func _on_retry_button_pressed() -> void:
 	await LevelTransition.fade_to_black()
 	get_tree().paused = false
 	get_tree().reload_current_scene()

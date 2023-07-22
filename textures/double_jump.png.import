@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckb55sy6bjcns"
-path="res://.godot/imported/slopes_flipped.png-56d25c2a5e07c4ff4f64232cd1461723.ctex"
+uid="uid://cq2apg5f7skt2"
+path="res://.godot/imported/double_jump.png-7a14e54399fd3daef8a91bbe9d40bdcb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://slopes_flipped.png"
-dest_files=["res://.godot/imported/slopes_flipped.png-56d25c2a5e07c4ff4f64232cd1461723.ctex"]
+source_file="res://textures/double_jump.png"
+dest_files=["res://.godot/imported/double_jump.png-7a14e54399fd3daef8a91bbe9d40bdcb.ctex"]
 
 [params]
 
