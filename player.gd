@@ -5,6 +5,9 @@ extends CharacterBody2D
 ## The only things to be used here are unlock_double_jump() and 
 ## unlock_wall_jump(). Anything else might interfere with the player's movement.
 
+# Pause the game
+signal pause
+
 ## Controls how the player moves through its environment
 @export var movement_data : PlayerMovementData
 
@@ -39,6 +42,10 @@ var last_wall_normal: Vector2 = Vector2.ZERO
 
 
 func _physics_process(delta):
+	# Handle the pause menu
+	if Input.is_action_just_pressed("game_pause"):
+		pause.emit()
+	
 	# Add the gravity
 	if not is_on_floor():
 		velocity.y += gravity * movement_data.gravity_scale * delta
@@ -71,6 +78,7 @@ func _physics_process(delta):
 			# If the player is on the floor or has just left the floor
 			velocity.y = movement_data.jump_velocity
 			coyote_jump_timer.stop()
+			SoundManager.play_sound(SoundManager.JUMP_SOUND)
 		elif can_double_jump and not wall_jumping:
 			# If the player is mid-air and can double jump
 			velocity.y = movement_data.jump_velocity
@@ -128,4 +136,5 @@ func _physics_process(delta):
 
 func _on_hazard_detector_area_entered(_area):
 	# Reset the player's position
+	SoundManager.play_sound(SoundManager.DEATH_SOUND)
 	global_position = starting_position

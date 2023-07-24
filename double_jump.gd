@@ -1,5 +1,5 @@
-extends Ability
+extends Interactable
 
 
-func _gain_ability(player: Player) -> void:
+func _interact(player: Player) -> void:
 	player.unlocked_double_jump = true

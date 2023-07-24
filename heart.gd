@@ -1,7 +1,12 @@
-extends Area2D
+extends Interactable
 
 
-func _on_body_entered(_body):
+func _ready():
+	super._ready()
+	interacted_sound = SoundManager.PICKUP_HEART_SOUND
+
+
+func _interact(_player: Player) -> void:
 	queue_free()
 	
 	var hearts = get_tree().get_nodes_in_group("hearts")

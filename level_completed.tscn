@@ -25,19 +25,18 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "Level Completed!"
+text = "LEVEL COMPLETED!"
 
 [node name="RetryButton" type="Button" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-text = "Retry"
+text = "retry"
 
 [node name="NextLevelButton" type="Button" parent="CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 16)
 layout_mode = 2
-text = "Next Level
-"
+text = "next level"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/NextLevelButton" to="." method="_on_next_level_button_pressed"]

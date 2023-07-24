@@ -1,9 +1,15 @@
 extends Node
 
-
+# Class constants
 const SoundEffectsPlayer = preload("res://addons/sound_manager/sound_effects.gd")
 const MusicPlayer = preload("res://addons/sound_manager/music.gd")
-
+# Sounds
+const ACCEPT_SOUND = preload("res://audio/accept.wav")
+const DEATH_SOUND = preload("res://audio/death.wav")
+const JUMP_SOUND = preload("res://audio/jump.wav")
+const PICKUP_HEART_SOUND = preload("res://audio/pickupHeart.wav")
+const POWERUP_SOUND = preload("res://audio/powerup.wav")
+const SELECT_SOUND = preload("res://audio/select.wav")
 
 @onready var sound_effects: SoundEffectsPlayer = $SoundEffects
 @onready var ui_sound_effects: SoundEffectsPlayer = $UISoundEffects

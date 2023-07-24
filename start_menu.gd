@@ -2,7 +2,6 @@ extends CenterContainer
 
 
 func _ready():
-	RenderingServer.set_default_clear_color(Color.BLACK)
 	%StartButton.grab_focus()
 	pass
 

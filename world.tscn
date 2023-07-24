@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bunq4vnyh8fvg"]
+[gd_scene load_steps=9 format=3 uid="uid://bunq4vnyh8fvg"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_irqg8"]
 [ext_resource type="PackedScene" uid="uid://csn1vguhf6mvw" path="res://player.tscn" id="2_1sbfj"]
 [ext_resource type="PackedScene" uid="uid://be343nm3f2dao" path="res://level_completed.tscn" id="5_hf3jy"]
+[ext_resource type="PackedScene" uid="uid://f5h5x2js68fl" path="res://pause_menu.tscn" id="5_k0xa3"]
 [ext_resource type="PackedScene" uid="uid://b06yrdmg8lyiv" path="res://level_tile_map.tscn" id="6_1lp61"]
 
 [sub_resource type="Animation" id="Animation_oe2lm"]
@@ -10,7 +11,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/CountdownScreen/CenterContainer/CountdownLabel:text")
+tracks/0/path = NodePath("UserInterface/CountdownScreen/CenterContainer/CountdownLabel:text")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -22,7 +23,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/CountdownScreen:visible")
+tracks/1/path = NodePath("UserInterface/CountdownScreen:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -38,7 +39,7 @@ length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/CountdownScreen/CenterContainer/CountdownLabel:text")
+tracks/0/path = NodePath("UserInterface/CountdownScreen/CenterContainer/CountdownLabel:text")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -50,7 +51,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/CountdownScreen:visible")
+tracks/1/path = NodePath("UserInterface/CountdownScreen:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -73,19 +74,22 @@ script = ExtResource("1_irqg8")
 
 [node name="LevelTileMap" parent="." instance=ExtResource("6_1lp61")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UserInterface" type="CanvasLayer" parent="."]
 
-[node name="LevelCompleted" parent="CanvasLayer" instance=ExtResource("5_hf3jy")]
+[node name="LevelCompleted" parent="UserInterface" instance=ExtResource("5_hf3jy")]
 visible = false
 
-[node name="LevelTimer" type="ColorRect" parent="CanvasLayer"]
+[node name="PauseMenu" parent="UserInterface" instance=ExtResource("5_k0xa3")]
+visible = false
+
+[node name="LevelTimer" type="ColorRect" parent="UserInterface"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 32.0
 grow_horizontal = 2
 color = Color(0, 0, 0, 0.27451)
 
-[node name="SecondsLabel" type="Label" parent="CanvasLayer/LevelTimer"]
+[node name="SecondsLabel" type="Label" parent="UserInterface/LevelTimer"]
 layout_mode = 2
 offset_left = 212.0
 offset_top = 4.0
@@ -94,7 +98,7 @@ offset_bottom = 25.0
 text = "secs"
 vertical_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/LevelTimer"]
+[node name="CenterContainer" type="CenterContainer" parent="UserInterface/LevelTimer"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -102,14 +106,14 @@ offset_top = 4.0
 offset_bottom = 25.0
 grow_horizontal = 2
 
-[node name="LevelTimerLabel" type="Label" parent="CanvasLayer/LevelTimer/CenterContainer"]
+[node name="LevelTimerLabel" type="Label" parent="UserInterface/LevelTimer/CenterContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(96, 0)
 layout_mode = 2
 text = "0.000"
 vertical_alignment = 1
 
-[node name="CountdownScreen" type="ColorRect" parent="CanvasLayer"]
+[node name="CountdownScreen" type="ColorRect" parent="UserInterface"]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -118,7 +122,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.498039)
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/CountdownScreen"]
+[node name="CenterContainer" type="CenterContainer" parent="UserInterface/CountdownScreen"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -128,7 +132,7 @@ grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="CountdownLabel" type="Label" parent="CanvasLayer/CountdownScreen/CenterContainer"]
+[node name="CountdownLabel" type="Label" parent="UserInterface/CountdownScreen/CenterContainer"]
 layout_mode = 2
 text = "Start in: 3"
 
@@ -139,5 +143,8 @@ libraries = {
 "": SubResource("AnimationLibrary_dh4gl")
 }
 
-[connection signal="next_level" from="CanvasLayer/LevelCompleted" to="." method="go_to_next_level"]
-[connection signal="retry" from="CanvasLayer/LevelCompleted" to="." method="_on_retry_button_pressed"]
+[connection signal="pause" from="Player" to="." method="_pause" binds= [true]]
+[connection signal="next_level" from="UserInterface/LevelCompleted" to="." method="go_to_next_level"]
+[connection signal="retry" from="UserInterface/LevelCompleted" to="." method="_on_retry_button_pressed"]
+[connection signal="resume" from="UserInterface/PauseMenu" to="." method="_pause" binds= [false]]
+[connection signal="retry" from="UserInterface/PauseMenu" to="." method="_on_retry_button_pressed"]
