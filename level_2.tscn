@@ -1,12 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbi6e5ilhuqpw"]
+[gd_scene load_steps=4 format=3 uid="uid://cbi6e5ilhuqpw"]
 
 [ext_resource type="PackedScene" uid="uid://bunq4vnyh8fvg" path="res://world.tscn" id="1_b3fm3"]
 [ext_resource type="PackedScene" uid="uid://3i8er1tbm1p0" path="res://spikes.tscn" id="2_gprbn"]
-[ext_resource type="PackedScene" uid="uid://btlxije2h82yi" path="res://level_3.tscn" id="2_wsiqi"]
 [ext_resource type="PackedScene" uid="uid://gwtocqx36143" path="res://heart.tscn" id="3_2yelk"]
 
 [node name="World" instance=ExtResource("1_b3fm3")]
-next_level = ExtResource("2_wsiqi")
 
 [node name="Spikes" parent="." index="1" instance=ExtResource("2_gprbn")]
 position = Vector2(16, 96)
