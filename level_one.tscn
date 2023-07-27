@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cpvdl56vew3b5"]
+[gd_scene load_steps=7 format=3 uid="uid://cpvdl56vew3b5"]
 
 [ext_resource type="PackedScene" uid="uid://bunq4vnyh8fvg" path="res://world.tscn" id="1_t7vyp"]
 [ext_resource type="PackedScene" uid="uid://mxbyf8kjejxm" path="res://level_two.tscn" id="2_gawq3"]
@@ -6,13 +6,18 @@
 [ext_resource type="PackedScene" uid="uid://gwtocqx36143" path="res://heart.tscn" id="3_t2ujl"]
 [ext_resource type="PackedScene" uid="uid://b06yrdmg8lyiv" path="res://level_tile_map.tscn" id="4_hhika"]
 [ext_resource type="PackedScene" uid="uid://ct1armfwldbk6" path="res://double_jump.tscn" id="6_o4an6"]
-[ext_resource type="PackedScene" uid="uid://b3g7hptvtbsse" path="res://wall_jump.tscn" id="7_d8qvo"]
 
 [node name="LevelOne" instance=ExtResource("1_t7vyp")]
 next_level = ExtResource("2_gawq3")
 
 [node name="Player" parent="." index="0"]
 position = Vector2(32, 120)
+
+[node name="CountdownTimer" parent="CanvasLayer" index="1"]
+visible = false
+
+[node name="CountdownLabel" parent="CanvasLayer/CountdownTimer/CenterContainer/CountdownLabel" index="0"]
+layout_mode = 0
 
 [node name="Spikes" parent="." index="3" instance=ExtResource("2_hh60k")]
 position = Vector2(168, 112)
@@ -34,6 +39,3 @@ layer_0/tile_data = PackedInt32Array(0, 131072, 0, 65536, 131072, 1, 131072, 131
 
 [node name="DoubleJump" parent="." index="9" instance=ExtResource("6_o4an6")]
 position = Vector2(104, 128)
-
-[node name="WallJump" parent="." index="11" instance=ExtResource("7_d8qvo")]
-position = Vector2(224, 120)

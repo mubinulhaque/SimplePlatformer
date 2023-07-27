@@ -20,5 +20,5 @@ func _on_body_entered(body: PhysicsBody2D):
 
 
 ## Defines what happens when a player collides with the interactable.
-func _interact(_player: Player) -> void:
+func _interact(player: Player) -> void:
 	print("Ability has been gained!")

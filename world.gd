@@ -12,7 +12,6 @@ var level_time_at_start: float = 0.0
 @onready var level_timer_label: Label = %LevelTimerLabel
 @onready var player = $Player
 @onready var pause_menu = $UserInterface/PauseMenu
-@onready var ui_sound_player = $UserInterfaceSoundPlayer
 
 
 func _ready():
@@ -59,6 +58,6 @@ func _show_level_completed() -> void:
 
 func _pause(to_pause: bool) -> void:
 	if to_pause:
-		pause_menu.resume_button.grab_focus.call_deferred()
+		pause_menu.resume_button.grab_focus()
 	get_tree().paused = to_pause
 	pause_menu.visible = to_pause

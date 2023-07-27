@@ -2,8 +2,7 @@ extends CenterContainer
 
 
 func _ready():
-	%StartButton.grab_focus.call_deferred()
-	SoundManager.connect_ui_buttons.call_deferred($VBoxContainer)
+	%StartButton.grab_focus()
 	pass
 
 

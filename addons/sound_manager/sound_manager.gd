@@ -6,7 +6,6 @@ const MusicPlayer = preload("res://addons/sound_manager/music.gd")
 # Sounds
 const ACCEPT_SOUND = preload("res://audio/accept.wav")
 const DEATH_SOUND = preload("res://audio/death.wav")
-const HURT_SOUND = preload("res://audio/hurt.wav")
 const JUMP_SOUND = preload("res://audio/jump.wav")
 const PICKUP_HEART_SOUND = preload("res://audio/pickupHeart.wav")
 const POWERUP_SOUND = preload("res://audio/powerup.wav")
@@ -104,11 +103,3 @@ func stop_music(fade_out_duration: float = 0.0) -> void:
 
 func set_default_music_bus(bus: String) -> void:
 	music.bus = bus
-
-func connect_ui_buttons(parent_node: Node) -> void:
-	for child in parent_node.get_children():
-		if child is Button:
-			child.focus_entered.connect(func():
-					SoundManager.play_ui_sound(SoundManager.SELECT_SOUND))
-			child.pressed.connect(func():
-					SoundManager.play_ui_sound(SoundManager.ACCEPT_SOUND))
