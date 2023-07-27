@@ -42,6 +42,7 @@ var death_velocity: Vector2 = Vector2.UP
 ## Used to reset the player's position if they die.
 @onready var starting_position: Vector2 = global_position
 @onready var collision_shape = $CollisionShape2D
+@onready var camera = $Camera2D
 
 
 func _physics_process(delta):
@@ -158,3 +159,11 @@ func _on_hazard_detector_area_entered(_area):
 		collision_shape.set_deferred("disabled", true)
 		SoundManager.play_sound(SoundManager.HURT_SOUND)
 		alive = false
+
+
+func set_camera_limits(top_left_position: Marker2D,
+		bottom_right_position: Marker2D):
+	camera.limit_left = top_left_position.position.x
+	camera.limit_top = top_left_position.position.y
+	camera.limit_right = bottom_right_position.position.x
+	camera.limit_bottom = bottom_right_position.position.y

@@ -13,6 +13,8 @@ var level_time_at_start: float = 0.0
 @onready var player = $Player
 @onready var pause_menu = $UserInterface/PauseMenu
 @onready var ui_sound_player = $UserInterfaceSoundPlayer
+@onready var top_left_room_limit = $TopLeftRoomLimit
+@onready var bottom_right_room_limit = $BottomRightRoomLimit
 
 
 func _ready():
@@ -20,6 +22,7 @@ func _ready():
 	
 	# Fade from black, pause the game and start the countdown
 	get_tree().paused = true
+	player.set_camera_limits(top_left_room_limit, bottom_right_room_limit)
 	await LevelTransition.fade_from_black()
 	countdown_player.play("countdown")
 	

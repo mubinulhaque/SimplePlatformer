@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bunq4vnyh8fvg"]
+[gd_scene load_steps=9 format=3 uid="uid://bunq4vnyh8fvg"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_irqg8"]
 [ext_resource type="PackedScene" uid="uid://csn1vguhf6mvw" path="res://player.tscn" id="2_1sbfj"]
 [ext_resource type="PackedScene" uid="uid://be343nm3f2dao" path="res://level_completed.tscn" id="5_hf3jy"]
 [ext_resource type="PackedScene" uid="uid://f5h5x2js68fl" path="res://pause_menu.tscn" id="5_k0xa3"]
 [ext_resource type="PackedScene" uid="uid://b06yrdmg8lyiv" path="res://level_tile_map.tscn" id="6_1lp61"]
-[ext_resource type="Script" path="res://ui_sounds.gd" id="6_6ebs6"]
 
 [sub_resource type="Animation" id="Animation_oe2lm"]
 length = 0.001
@@ -72,6 +71,7 @@ _data = {
 script = ExtResource("1_irqg8")
 
 [node name="Player" parent="." instance=ExtResource("2_1sbfj")]
+position = Vector2(0, -4)
 
 [node name="LevelTileMap" parent="." instance=ExtResource("6_1lp61")]
 
@@ -144,9 +144,11 @@ libraries = {
 "": SubResource("AnimationLibrary_dh4gl")
 }
 
-[node name="UserInterfaceSoundPlayer" type="Node" parent="."]
-process_mode = 2
-script = ExtResource("6_6ebs6")
+[node name="TopLeftRoomLimit" type="Marker2D" parent="."]
+position = Vector2(-72, -138)
+
+[node name="BottomRightRoomLimit" type="Marker2D" parent="."]
+position = Vector2(248, 42)
 
 [connection signal="pause" from="Player" to="." method="_pause" binds= [true]]
 [connection signal="next_level" from="UserInterface/LevelCompleted" to="." method="go_to_next_level"]
