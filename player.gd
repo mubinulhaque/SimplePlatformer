@@ -41,15 +41,13 @@ var death_velocity: Vector2 = Vector2.UP
 ## The position the player was at when they started the level.
 ## Used to reset the player's position if they die.
 @onready var starting_position: Vector2 = global_position
-@onready var collision_shape = $CollisionShape2D
-@onready var camera = $Camera2D
+## The player's collision shape
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+## The camera attached to the player
+@onready var camera: Camera2D = $Camera2D
 
 
-func _physics_process(delta):
-	# Handle the pause menu
-	if Input.is_action_just_pressed("game_pause"):
-		pause.emit()
-	
+func _physics_process(delta) -> void:
 	if alive:
 		# Add the gravity
 		if not is_on_floor():
@@ -57,7 +55,7 @@ func _physics_process(delta):
 			
 		# Handle wall jumping
 		if ((is_on_wall_only() or wall_jump_timer.time_left > 0.0)
-				and Input.is_action_just_pressed("game_jump")
+				and Events.is_input_action_just_pressed("game_jump")
 				and unlocked_wall_jump):
 			# If the player is only colliding with a wall (and not the floor)
 			# or has just left the wall and wants to jump
@@ -78,7 +76,7 @@ func _physics_process(delta):
 			can_double_jump = true
 		
 		# Handle jumping 
-		if Input.is_action_just_pressed("game_jump"):
+		if Events.is_input_action_just_pressed("game_jump"):
 			if is_on_floor() or coyote_jump_timer.time_left > 0.0:
 				# If the player is on the floor or has just left the floor
 				velocity.y = movement_data.jump_velocity
@@ -90,7 +88,7 @@ func _physics_process(delta):
 				can_double_jump = false
 
 		# Get the input direction and handle the movement/deceleration
-		var horizontal_direction = Input.get_axis("game_left", "game_right")
+		var horizontal_direction = Events.get_input_axis("game_left", "game_right")
 		if horizontal_direction: # If the player wants to move horizontally
 			if is_on_floor():
 				# If the player wants to move horizontally while on the ground
@@ -150,7 +148,13 @@ func _physics_process(delta):
 			alive = true
 
 
-func _on_hazard_detector_area_entered(_area):
+func _input(_event) -> void:
+	# Handle the pause menu
+	if Events.is_input_action_just_pressed("game_pause"):
+		pause.emit()
+
+
+func _on_hazard_detector_area_entered(_area) -> void:
 	# When the player touches a hazard, play a death animation
 	# and then reset their position
 	if alive:
@@ -161,8 +165,9 @@ func _on_hazard_detector_area_entered(_area):
 		alive = false
 
 
+## Sets the camera limits using two Marker2D nodes
 func set_camera_limits(top_left_position: Marker2D,
-		bottom_right_position: Marker2D):
+		bottom_right_position: Marker2D) -> void:
 	camera.limit_left = top_left_position.position.x
 	camera.limit_top = top_left_position.position.y
 	camera.limit_right = bottom_right_position.position.x

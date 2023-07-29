@@ -12,12 +12,11 @@ var level_time_at_start: float = 0.0
 @onready var level_timer_label: Label = %LevelTimerLabel
 @onready var player = $Player
 @onready var pause_menu = $UserInterface/PauseMenu
-@onready var ui_sound_player = $UserInterfaceSoundPlayer
 @onready var top_left_room_limit = $TopLeftRoomLimit
 @onready var bottom_right_room_limit = $BottomRightRoomLimit
 
 
-func _ready():
+func _ready() -> void:
 	Events.level_completed.connect(_show_level_completed)
 	
 	# Fade from black, pause the game and start the countdown
@@ -33,7 +32,7 @@ func _ready():
 	level_time_at_start = Time.get_ticks_msec()
 
 
-func _process(_delta):
+func _process(_delta) -> void:
 	level_time_passed = Time.get_ticks_msec() - level_time_at_start
 	level_timer_label.text = str(level_time_passed / 1000)
 

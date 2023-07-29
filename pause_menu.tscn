@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://f5h5x2js68fl"]
+[gd_scene load_steps=4 format=3 uid="uid://f5h5x2js68fl"]
 
 [ext_resource type="Script" path="res://pause_menu.gd" id="1_swry7"]
+[ext_resource type="Texture2D" uid="uid://bp58drjdgvxsi" path="res://addons/controller_icons/assets/key/enter_alt.png" id="2_wcu48"]
+[ext_resource type="Script" path="res://addons/controller_icons/objects/TextureRect.gd" id="3_xi3po"]
 
 [node name="PauseMenu" type="ColorRect"]
 process_mode = 3
@@ -33,19 +35,48 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 focus_neighbor_top = NodePath("../MainMenuButton")
+mouse_default_cursor_shape = 2
 text = "resume
 "
 
 [node name="RetryButton" type="Button" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "retry"
 
 [node name="MainMenuButton" type="Button" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../ResumeButton")
+mouse_default_cursor_shape = 2
 text = "main menu"
+
+[node name="ControllerTextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 0
+offset_left = 232.0
+offset_top = 152.0
+offset_right = 256.0
+offset_bottom = 176.0
+focus_neighbor_top = NodePath("../CenterContainer/VBoxContainer/MainMenuButton")
+focus_neighbor_bottom = NodePath("../CenterContainer/VBoxContainer/ResumeButton")
+focus_mode = 2
+texture = ExtResource("2_wcu48")
+expand_mode = 1
+script = ExtResource("3_xi3po")
+path = "ui_accept"
+max_width = 24
+
+[node name="Label" type="Label" parent="ControllerTextureRect"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 8.0
+offset_right = 101.0
+offset_bottom = 32.0
+scale = Vector2(0.5, 0.5)
+text = "Select"
+vertical_alignment = 1
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]

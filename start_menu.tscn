@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2reuax4e5fnl"]
+[gd_scene load_steps=4 format=3 uid="uid://c2reuax4e5fnl"]
 
 [ext_resource type="Script" path="res://start_menu.gd" id="1_vw0ru"]
+[ext_resource type="Texture2D" uid="uid://bp58drjdgvxsi" path="res://addons/controller_icons/assets/key/enter_alt.png" id="2_dn7sd"]
+[ext_resource type="Script" path="res://addons/controller_icons/objects/TextureRect.gd" id="3_8opx6"]
 
 [node name="StartMenu" type="CenterContainer"]
 anchors_preset = 15
@@ -26,14 +28,45 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 16)
 layout_mode = 2
 focus_neighbor_top = NodePath("../QuitButton")
-text = "Start"
+mouse_default_cursor_shape = 2
+text = "start"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(64, 16)
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../StartButton")
-text = "Quit
+mouse_default_cursor_shape = 2
+text = "quit
 "
+
+[node name="Container" type="Control" parent="."]
+layout_mode = 2
+focus_neighbor_top = NodePath("../VBoxContainer/QuitButton")
+focus_neighbor_bottom = NodePath("../VBoxContainer/StartButton")
+focus_mode = 2
+
+[node name="ControllerTextureRect" type="TextureRect" parent="Container"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+offset_left = 71.0
+offset_top = 62.0
+offset_right = 95.0
+offset_bottom = 86.0
+texture = ExtResource("2_dn7sd")
+expand_mode = 1
+script = ExtResource("3_8opx6")
+path = "ui_accept"
+max_width = 24
+
+[node name="Label" type="Label" parent="Container/ControllerTextureRect"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 8.0
+offset_right = 101.0
+offset_bottom = 32.0
+scale = Vector2(0.5, 0.5)
+text = "Select"
+vertical_alignment = 1
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
