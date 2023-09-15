@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bunq4vnyh8fvg"]
+[gd_scene load_steps=10 format=3 uid="uid://bunq4vnyh8fvg"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_irqg8"]
 [ext_resource type="PackedScene" uid="uid://csn1vguhf6mvw" path="res://player.tscn" id="2_1sbfj"]
 [ext_resource type="PackedScene" uid="uid://be343nm3f2dao" path="res://level_completed.tscn" id="5_hf3jy"]
 [ext_resource type="PackedScene" uid="uid://f5h5x2js68fl" path="res://pause_menu.tscn" id="5_k0xa3"]
 [ext_resource type="PackedScene" uid="uid://b06yrdmg8lyiv" path="res://level_tile_map.tscn" id="6_1lp61"]
+[ext_resource type="PackedScene" uid="uid://bls7618wxjs1e" path="res://controller_disconnected_popup.tscn" id="6_1oihx"]
 
 [sub_resource type="Animation" id="Animation_oe2lm"]
 length = 0.001
@@ -137,6 +138,9 @@ size_flags_vertical = 0
 layout_mode = 2
 text = "Start in: 3"
 
+[node name="ControllerDisconnectedPopup" parent="UserInterface" instance=ExtResource("6_1oihx")]
+visible = false
+
 [node name="CountdownPlayer" type="AnimationPlayer" parent="."]
 process_mode = 3
 autoplay = "countdown"
@@ -155,3 +159,4 @@ position = Vector2(248, 42)
 [connection signal="retry" from="UserInterface/LevelCompleted" to="." method="_on_retry_button_pressed"]
 [connection signal="resume" from="UserInterface/PauseMenu" to="." method="_pause" binds= [false]]
 [connection signal="retry" from="UserInterface/PauseMenu" to="." method="_on_retry_button_pressed"]
+[connection signal="controlled_reconnected" from="UserInterface/ControllerDisconnectedPopup" to="." method="_on_controller_reconnected"]

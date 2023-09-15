@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://f5h5x2js68fl"]
+[gd_scene load_steps=6 format=3 uid="uid://f5h5x2js68fl"]
 
 [ext_resource type="Script" path="res://pause_menu.gd" id="1_swry7"]
+[ext_resource type="Texture2D" uid="uid://d04bqc5v3befo" path="res://addons/controller_icons/assets/key/arrow_up.png" id="2_r66x7"]
 [ext_resource type="Texture2D" uid="uid://bp58drjdgvxsi" path="res://addons/controller_icons/assets/key/enter_alt.png" id="2_wcu48"]
 [ext_resource type="Script" path="res://addons/controller_icons/objects/TextureRect.gd" id="3_xi3po"]
+[ext_resource type="Texture2D" uid="uid://cge2w6yy0r2cx" path="res://addons/controller_icons/assets/key/arrow_down.png" id="4_8krp2"]
 
 [node name="PauseMenu" type="ColorRect"]
 process_mode = 3
@@ -27,7 +29,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "paused"
+text = "PAUSED"
 horizontal_alignment = 1
 
 [node name="ResumeButton" type="Button" parent="CenterContainer/VBoxContainer"]
@@ -52,12 +54,58 @@ focus_neighbor_bottom = NodePath("../ResumeButton")
 mouse_default_cursor_shape = 2
 text = "main menu"
 
-[node name="ControllerTextureRect" type="TextureRect" parent="."]
+[node name="Up" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 0
-offset_left = 232.0
+offset_left = 88.0
 offset_top = 152.0
-offset_right = 256.0
+offset_right = 112.0
+offset_bottom = 176.0
+texture = ExtResource("2_r66x7")
+expand_mode = 1
+script = ExtResource("3_xi3po")
+path = "ui_up"
+max_width = 24
+
+[node name="Text" type="Label" parent="Up"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 8.0
+offset_right = 97.0
+offset_bottom = 32.0
+scale = Vector2(0.5, 0.5)
+text = "Up"
+vertical_alignment = 1
+
+[node name="Down" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 0
+offset_left = 168.0
+offset_top = 152.0
+offset_right = 192.0
+offset_bottom = 176.0
+texture = ExtResource("4_8krp2")
+expand_mode = 1
+script = ExtResource("3_xi3po")
+path = "ui_down"
+max_width = 24
+
+[node name="Text" type="Label" parent="Down"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 8.0
+offset_right = 97.0
+offset_bottom = 32.0
+scale = Vector2(0.5, 0.5)
+text = "Down"
+vertical_alignment = 1
+
+[node name="Select" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 0
+offset_left = 248.0
+offset_top = 152.0
+offset_right = 272.0
 offset_bottom = 176.0
 focus_neighbor_top = NodePath("../CenterContainer/VBoxContainer/MainMenuButton")
 focus_neighbor_bottom = NodePath("../CenterContainer/VBoxContainer/ResumeButton")
@@ -68,11 +116,11 @@ script = ExtResource("3_xi3po")
 path = "ui_accept"
 max_width = 24
 
-[node name="Label" type="Label" parent="ControllerTextureRect"]
+[node name="Label" type="Label" parent="Select"]
 layout_mode = 0
-offset_left = 32.0
+offset_left = 28.0
 offset_top = 8.0
-offset_right = 101.0
+offset_right = 97.0
 offset_bottom = 32.0
 scale = Vector2(0.5, 0.5)
 text = "Select"

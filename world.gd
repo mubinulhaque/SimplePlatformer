@@ -14,9 +14,11 @@ var level_time_at_start: float = 0.0
 @onready var pause_menu = $UserInterface/PauseMenu
 @onready var top_left_room_limit = $TopLeftRoomLimit
 @onready var bottom_right_room_limit = $BottomRightRoomLimit
+@onready var controller_disconnected_popup = $UserInterface/ControllerDisconnectedPopup
 
 
 func _ready() -> void:
+	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	Events.level_completed.connect(_show_level_completed)
 	
 	# Fade from black, pause the game and start the countdown
@@ -64,3 +66,14 @@ func _pause(to_pause: bool) -> void:
 		pause_menu.resume_button.grab_focus.call_deferred()
 	get_tree().paused = to_pause
 	pause_menu.visible = to_pause
+
+
+func _on_joy_connection_changed(device_id: int, connected: bool):
+	if not connected:
+		controller_disconnected_popup.show()
+		controller_disconnected_popup.okay_button.grab_focus.call_deferred()
+		get_tree().paused = true
+
+
+func _on_controller_reconnected():
+	get_tree().paused = false

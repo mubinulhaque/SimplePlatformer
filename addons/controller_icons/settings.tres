@@ -7,5 +7,5 @@ script = ExtResource("1")
 joypad_fallback = 8
 joypad_deadzone = 1.0
 allow_mouse_remap = false
-mouse_min_movement = 200
-custom_asset_dir = "res://resources"
+mouse_min_movement = 10000
+custom_asset_dir = "res://textures/controller_icons"
