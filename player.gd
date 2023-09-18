@@ -29,6 +29,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 ## after the player has left the wall.
 var last_wall_normal: Vector2 = Vector2.ZERO
 var death_velocity: Vector2 = Vector2.UP
+var current_room: Rect2
 
 ## The animated sprite used to represent the player
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -43,8 +44,6 @@ var death_velocity: Vector2 = Vector2.UP
 @onready var starting_position: Vector2 = global_position
 ## The player's collision shape
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-## The camera attached to the player
-@onready var camera: Camera2D = $Camera2D
 
 
 func _physics_process(delta) -> void:
@@ -163,12 +162,3 @@ func _on_hazard_detector_area_entered(_area) -> void:
 		collision_shape.set_deferred("disabled", true)
 		SoundManager.play_sound(SoundManager.HURT_SOUND)
 		alive = false
-
-
-## Sets the camera limits using two Marker2D nodes
-func set_camera_limits(top_left_position: Marker2D,
-		bottom_right_position: Marker2D) -> void:
-	camera.limit_left = top_left_position.position.x
-	camera.limit_top = top_left_position.position.y
-	camera.limit_right = bottom_right_position.position.x
-	camera.limit_bottom = bottom_right_position.position.y

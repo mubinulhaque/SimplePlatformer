@@ -117,11 +117,6 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-editor_draw_screen = false
-
 [node name="HazardDetector" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4

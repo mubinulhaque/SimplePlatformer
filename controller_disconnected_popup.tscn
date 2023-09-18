@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bls7618wxjs1e"]
 
 [ext_resource type="Script" path="res://controller_disconnected_popup.gd" id="1_boin6"]
-[ext_resource type="Texture2D" uid="uid://bp58drjdgvxsi" path="res://addons/controller_icons/assets/key/enter_alt.png" id="1_tnpcn"]
 [ext_resource type="Script" path="res://addons/controller_icons/objects/Button.gd" id="2_ew4ln"]
+[ext_resource type="Texture2D" uid="uid://bp58drjdgvxsi" path="res://addons/controller_icons/assets/key/enter_alt.png" id="2_heeqb"]
 
 [node name="ControllerDisconnectedPopup" type="ColorRect"]
 anchors_preset = 15
@@ -40,7 +40,7 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "okay, i will use a different one"
-icon = ExtResource("1_tnpcn")
+icon = ExtResource("2_heeqb")
 expand_icon = true
 script = ExtResource("2_ew4ln")
 path = "ui_accept"

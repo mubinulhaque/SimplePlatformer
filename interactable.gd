@@ -14,7 +14,8 @@ func _ready():
 
 func _on_body_entered(body: PhysicsBody2D):
 	if body is Player:
-		SoundManager.play_sound(interacted_sound)
+		if interacted_sound:
+			SoundManager.play_sound(interacted_sound)
 		_interact(body)
 		queue_free()
 

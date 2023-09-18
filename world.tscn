@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bunq4vnyh8fvg"]
+[gd_scene load_steps=11 format=3 uid="uid://bunq4vnyh8fvg"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_irqg8"]
 [ext_resource type="PackedScene" uid="uid://csn1vguhf6mvw" path="res://player.tscn" id="2_1sbfj"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://f5h5x2js68fl" path="res://pause_menu.tscn" id="5_k0xa3"]
 [ext_resource type="PackedScene" uid="uid://b06yrdmg8lyiv" path="res://level_tile_map.tscn" id="6_1lp61"]
 [ext_resource type="PackedScene" uid="uid://bls7618wxjs1e" path="res://controller_disconnected_popup.tscn" id="6_1oihx"]
+[ext_resource type="PackedScene" uid="uid://dqbht3dlnpavy" path="res://room.tscn" id="7_b0ukh"]
 
 [sub_resource type="Animation" id="Animation_oe2lm"]
 length = 0.001
@@ -148,11 +149,9 @@ libraries = {
 "": SubResource("AnimationLibrary_dh4gl")
 }
 
-[node name="TopLeftRoomLimit" type="Marker2D" parent="."]
-position = Vector2(-72, -138)
+[node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="BottomRightRoomLimit" type="Marker2D" parent="."]
-position = Vector2(248, 42)
+[node name="Room" parent="." instance=ExtResource("7_b0ukh")]
 
 [connection signal="pause" from="Player" to="." method="_pause" binds= [true]]
 [connection signal="next_level" from="UserInterface/LevelCompleted" to="." method="go_to_next_level"]
@@ -160,3 +159,4 @@ position = Vector2(248, 42)
 [connection signal="resume" from="UserInterface/PauseMenu" to="." method="_pause" binds= [false]]
 [connection signal="retry" from="UserInterface/PauseMenu" to="." method="_on_retry_button_pressed"]
 [connection signal="controlled_reconnected" from="UserInterface/ControllerDisconnectedPopup" to="." method="_on_controller_reconnected"]
+[connection signal="new_room_entered" from="Room" to="." method="_on_new_room_entered"]
