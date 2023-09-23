@@ -1,6 +1,7 @@
 extends Node
 
 signal level_completed # Has the level been completed?
+signal heart_collected # Has a heart been collected?
 
 var window_focused: bool = true # Is the window currently focused?
 var check_for_window_focus: bool = true # Should we check for window focus?

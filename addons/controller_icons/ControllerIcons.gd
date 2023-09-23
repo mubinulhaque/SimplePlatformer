@@ -24,6 +24,9 @@ func _enter_tree():
 	if Engine.is_editor_hint():
 		_parse_input_actions()
 
+func _exit_tree():
+	Mapper.queue_free()
+
 func _parse_input_actions():
 	# Default actions will be the builtin editor actions when
 	# the script is at editor ("tool") level. To pickup more
@@ -85,7 +88,6 @@ func _parse_input_actions():
 			_add_custom_input_action(input_action, data)
 
 func _ready():
-	process_mode = Node.PROCESS_MODE_ALWAYS
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	_settings = load("res://addons/controller_icons/settings.tres")
 	if not _settings:
@@ -308,7 +310,7 @@ func _convert_key_to_path(scancode: int):
 			return "key/ctrl"
 		KEY_META:
 			match OS.get_name():
-				"OSX":
+				"macOS":
 					return "key/command"
 				_:
 					return "key/meta"

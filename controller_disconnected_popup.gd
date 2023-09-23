@@ -9,7 +9,7 @@ func _ready():
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 
 
-func _on_joy_connection_changed(device_id: int, connected: bool):
+func _on_joy_connection_changed(_device_id: int, connected: bool):
 	if connected:
 		_hide_popup()
 

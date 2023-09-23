@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bunq4vnyh8fvg"]
+[gd_scene load_steps=12 format=3 uid="uid://bunq4vnyh8fvg"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_irqg8"]
 [ext_resource type="PackedScene" uid="uid://csn1vguhf6mvw" path="res://player.tscn" id="2_1sbfj"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://f5h5x2js68fl" path="res://pause_menu.tscn" id="5_k0xa3"]
 [ext_resource type="PackedScene" uid="uid://b06yrdmg8lyiv" path="res://level_tile_map.tscn" id="6_1lp61"]
 [ext_resource type="PackedScene" uid="uid://bls7618wxjs1e" path="res://controller_disconnected_popup.tscn" id="6_1oihx"]
+[ext_resource type="Texture2D" uid="uid://rft80vipg84u" path="res://textures/heart.png" id="6_d3u50"]
 [ext_resource type="PackedScene" uid="uid://dqbht3dlnpavy" path="res://room.tscn" id="7_b0ukh"]
 
 [sub_resource type="Animation" id="Animation_oe2lm"]
@@ -72,10 +73,10 @@ _data = {
 [node name="World" type="Node2D"]
 script = ExtResource("1_irqg8")
 
+[node name="LevelTileMap" parent="." instance=ExtResource("6_1lp61")]
+
 [node name="Player" parent="." instance=ExtResource("2_1sbfj")]
 position = Vector2(0, -4)
-
-[node name="LevelTileMap" parent="." instance=ExtResource("6_1lp61")]
 
 [node name="UserInterface" type="CanvasLayer" parent="."]
 
@@ -94,10 +95,10 @@ color = Color(0, 0, 0, 0.27451)
 
 [node name="SecondsLabel" type="Label" parent="UserInterface/LevelTimer"]
 layout_mode = 2
-offset_left = 212.0
-offset_top = 4.0
-offset_right = 254.0
-offset_bottom = 25.0
+offset_left = 232.0
+offset_top = 7.0
+offset_right = 274.0
+offset_bottom = 28.0
 text = "secs"
 vertical_alignment = 1
 
@@ -105,8 +106,9 @@ vertical_alignment = 1
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
+offset_left = 80.0
 offset_top = 4.0
-offset_bottom = 25.0
+offset_bottom = 32.0
 grow_horizontal = 2
 
 [node name="LevelTimerLabel" type="Label" parent="UserInterface/LevelTimer/CenterContainer"]
@@ -115,6 +117,20 @@ custom_minimum_size = Vector2(96, 0)
 layout_mode = 2
 text = "0.000"
 vertical_alignment = 1
+
+[node name="HeartCounter" type="TextureRect" parent="UserInterface/LevelTimer"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("6_d3u50")
+
+[node name="HeartCounterLabel" type="Label" parent="UserInterface/LevelTimer/HeartCounter"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 8.0
+offset_right = 74.0
+offset_bottom = 29.0
+text = "0/0"
 
 [node name="CountdownScreen" type="ColorRect" parent="UserInterface"]
 visible = false
@@ -153,10 +169,10 @@ libraries = {
 
 [node name="Room" parent="." instance=ExtResource("7_b0ukh")]
 
-[connection signal="pause" from="Player" to="." method="_pause" binds= [true]]
+[connection signal="pause" from="Player" to="." method="_pause"]
 [connection signal="next_level" from="UserInterface/LevelCompleted" to="." method="go_to_next_level"]
 [connection signal="retry" from="UserInterface/LevelCompleted" to="." method="_on_retry_button_pressed"]
-[connection signal="resume" from="UserInterface/PauseMenu" to="." method="_pause" binds= [false]]
+[connection signal="resume" from="UserInterface/PauseMenu" to="." method="_resume"]
 [connection signal="retry" from="UserInterface/PauseMenu" to="." method="_on_retry_button_pressed"]
 [connection signal="controlled_reconnected" from="UserInterface/ControllerDisconnectedPopup" to="." method="_on_controller_reconnected"]
 [connection signal="new_room_entered" from="Room" to="." method="_on_new_room_entered"]
