@@ -88,6 +88,7 @@ func _parse_input_actions():
 			_add_custom_input_action(input_action, data)
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	_settings = load("res://addons/controller_icons/settings.tres")
 	if not _settings:
