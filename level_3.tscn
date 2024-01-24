@@ -115,4 +115,4 @@ visible = false
 position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_4fmgf")
 
-[connection signal="new_room_entered" from="Room2" to="." method="_on_new_room_entered" flags=18]
+[connection signal="new_room_entered" from="Room2" to="." method="_on_new_room_entered"]

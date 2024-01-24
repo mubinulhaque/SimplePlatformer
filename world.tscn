@@ -160,10 +160,10 @@ visible = false
 
 [node name="CountdownPlayer" type="AnimationPlayer" parent="."]
 process_mode = 3
-autoplay = "countdown"
 libraries = {
 "": SubResource("AnimationLibrary_dh4gl")
 }
+autoplay = "countdown"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

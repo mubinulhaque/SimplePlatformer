@@ -62,4 +62,4 @@ position = Vector2(368, -64)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Room2" index="0"]
 shape = SubResource("RectangleShape2D_oh0ig")
 
-[connection signal="new_room_entered" from="Room2" to="." method="_on_new_room_entered" flags=18]
+[connection signal="new_room_entered" from="Room2" to="." method="_on_new_room_entered"]
